@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+<style>
+  .image-container {
+    position: relative;
+    text-align: center;
+    margin-top: 20px; /* Additional space above the container, adjust as needed */
+  }
+
+  .center-image {
+    display: block;
+    width: 89%; /* Adjusted width as per your specification */
+    height: auto;
+    margin: 0 auto; /* Center the image horizontally */
+    border: 2px solid gold; /* Golden border around the image */
+    opacity: 1;
+  }
+
+  #startAnalysisBtn {
+    position: absolute;
+    bottom: 10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  main {
+    position: relative;
+    text-align: center;
+  }
+
+  .welcome-text, .lead, button {
+    color: #000000;
+    text-shadow: 1px 1px 2px #ffffff;
+  }
+</style>
+<body>
+<%- include('partials/_header.ejs') %>
+<main role="main" class="container mt-4">
+  <div class="text-center">
+    <h1><span class="welcome-text">Welcome to The Electronic Orchestra Analyzer</span></h1>
+    <p class="lead">Explore the world of music with WisteriaApp. Discover detailed information about various musical instruments, including their names, spatial localization, and transcriptions of notes. Dive into the vibrant, orchestra-themed user interface designed for music enthusiasts and researchers alike.</p>
+    <div class="image-container">
+      <img src="/images/horizontal.jpeg" alt="Centered Image" class="center-image">
+      <button id="startAnalysisBtn" class="btn btn-success btn-lg">Start Analysis</button>
+    </div>
+  </div>
+</main>
+<%- include('partials/_history.ejs') %>
+</body>
+<%- include('partials/_footer.ejs') %>
+<script src="/js/main.js"></script>
+</html>

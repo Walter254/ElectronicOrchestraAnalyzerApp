@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table, th, td {
+    border: 1px solid black;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  tr:nth-child(even) {background-color: #f2f2f2;}
+  tr:hover {background-color: #ddd;}
+</style>
+<body>
+<%- include('partials/_header.ejs') %>
+<main role="main" class="container mt-4">
+  <h2>History</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (history && history.length > 0) { %>
+        <% history.forEach(function(entry) { %>
+          <tr>
+            <td><%= new Date(entry.timestamp).toLocaleString() %></td>
+            <td>
+              <% entry.instruments.forEach(function(instrument, index) { %>
+                <strong>Instrument <%= index + 1 %>:</strong> Name: <%= instrument.name %>, Section: <%= instrument.section %>, Row: <%= instrument.row %>, Position: <%= instrument.position %>, Transcription of Notes: <%= instrument.transcriptionOfNotes.join(", ") %><br>
+              <% }); %>
+            </td>
+          </tr>
+        <% }); %>
+      <% } else { %>
+        <tr>
+          <td colspan="2">No history found</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</main>
+</body>
+<%- include('partials/_footer.ejs') %>
+</html>

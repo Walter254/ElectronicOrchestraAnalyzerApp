@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+
+/* Global Styles */
+body, html {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1140px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+/* Card Styles */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card.expanded {
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    transform: scale(1.1);
+    z-index: 1050;
+}
+
+.card.expanded .card-body {
+    max-height: none;
+    overflow: visible;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  .container {
+    max-width: 540px;
+  }
+
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand,
+  .nav-link {
+    text-align: center;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+}
+
+/* Instruments Grid */
+#instrumentsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Ensuring instrument details modal/dialog is centered and clearly visible on smaller screens */
+.modal-dialog {
+  margin: 1.75rem auto;
+}
+
+.modal-content {
+  overflow-y: auto;
+}
+
+.welcome-text {
+  font-weight: bold;
+  font-family: 'Merriweather', serif;
+}
+
+@keyframes movingLight {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 400% 0;
+  }
+}
+
+@keyframes flip {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes lightRing {
+  0%, 100% {
+    box-shadow: 0 0 0 0px rgba(255, 215, 0, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+}
+
+.Instrument-header-text {
+  font-weight: bold;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+}
+
+.instrument-card .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 250px;  /* Increase the size */
+  height: 250px;  /* Keep width and height the same for a circle */
+  border-radius: 50%;  /* This makes the element circular */
+  border: 3px solid gold;  /* Makes the border thicker and golden */
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;  /* Smooth transition for effects */
+  overflow: hidden;  /* Ensures the content respects the circular shape */
+  position: relative;  /* Necessary for positioning adjustments when expanded */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Adds a subtle shadow for depth */
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);  /* A subtle gradient for a bit of texture */
+  z-index: 1;  /* Normal stack order */
+  border: 3px solid transparent; /* Use transparent border */
+  background-image: linear-gradient(white, white), linear-gradient(to right, gold, #ffd700, white, #ffd700, gold);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  /* Apply the animation always */
+  animation: movingLight 8s linear infinite;
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.card-img-top {
+  width: 90%;
+  height: auto;
+  border-radius: 50%;
+  margin-top: 5%;
+}
+
+/* Expanded state styles */
+.instrument-card .expanded {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  border-width: 5px;
+  z-index: 1050;
+}
+
+/* Blurring other cards */
+.instrument-card.blur {
+  filter: blur(5px);
+}
+
+#instrumentsGrid {
+  margin-top: 40px;
+}
+
+/* Enhancing visual styling of titles within instrument cards */
+.card .card-title {
+  font-weight: bold;
+  font-size: 1.25rem; /* This increases the font size slightly */
+  color: #333333; /* Adjusted for better contrast against card background. Change the color as needed to fit the theme */
+}

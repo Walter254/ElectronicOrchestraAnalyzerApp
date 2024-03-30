@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/_head.ejs') %>
+<style>
+  main {
+    background-image: url('/images/instrumentimg.jpeg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  /* to improve text readability */
+  .Instrument-header-text, #instrumentsGrid {
+    color: white;  
+    position: relative;
+    z-index: 2;
+  }
+
+  
+
+  .done-btn {
+    margin-top: 10px;
+  }
+</style>
+<body>
+<%- include('partials/_header.ejs') %>
+<main role="main" class="container mt-4">
+  <h2 class="Instrument-header-text">Instruments</h2>
+  <div id="instrumentsGrid" class="row"></div>
+  <input type="text" id="sessionLabelInput" placeholder="Enter session label" class="form-control done-btn">
+  <button id="saveHistoryBtn" class="btn btn-success done-btn">Done</button>
+</main>
+<script src="/js/instruments.js"></script>
+<script>
+  document.getElementById('saveHistoryBtn').addEventListener('click', function() {
+    const sessionLabel = document.getElementById('sessionLabelInput').value;
+    if (!sessionLabel) {
+      alert('Please enter a session label.');
+      return;
+    }
+    fetch('/api/history', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({sessionLabel: sessionLabel}),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to save history');
+      }
+      return response.json();
+    })
+    .then(data => {
+      alert('Thank you for using the application. Your session has been saved.');
+      window.location.href = '/history';
+    })
+    .catch(error => {
+      console.error('Error saving session history:', error);
+      alert('An error occurred while saving your session. Please try again.');
+    });
+  });
+</script>
+</body>
+<%- include('partials/_footer.ejs') %>
+</html>
