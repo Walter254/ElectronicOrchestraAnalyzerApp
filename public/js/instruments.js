@@ -1,136 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/instruments')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        const grid = document.getElementById('instrumentsGrid');
-        data.forEach(instrument => {
-            const col = document.createElement('div');
-            col.className = 'col-md-4 mb-4 instrument-card';
-            col.innerHTML = `
-                <div class="card">
-                    <img src="${instrument.photo}" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">${instrument.name}</h5>
-                        <p class="card-text">Section: ${instrument.spatialLocalization.section}, Row: ${instrument.spatialLocalization.row}, Position: ${instrument.spatialLocalization.position}</p>
-                        <button class="btn btn-primary view-details-btn" data-id="${instrument._id}">View Details</button>
-                        <div class="instrument-details d-none">
-                            <p><strong>Transcription of Notes:</strong> Loading...</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-            grid.appendChild(col);
-        });
-        attachClickEventToCards();
-    })
-    .catch(error => {
-        console.error('Error loading instruments:', error.message, error.stack);
-        alert('Failed to load instruments. Please try again later.');
+    var instrumentsData = [];
+    fetchInstrumentsData();
+
+    var width = 350, height = 200; 
+    var svg = d3.select("#gauge")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+    var g = svg.append("g")
+               .attr("transform", `translate(${width / 2}, ${height - 10})`);
+
+    var arc = d3.arc()
+                .innerRadius(130) 
+                .outerRadius(160)
+                .startAngle(-Math.PI / 2)
+                .endAngle(Math.PI / 2);
+
+    g.append("path")
+    .attr("d", arc())
+    .attr("fill", "blue")
+    .attr("fill-opacity",0.75)
+    .attr("stroke", "black")
+    .attr("stroke-width", "2")
+    .attr("stroke-linecap", "butt");
+     
+    
+
+    var needle = g.append("line")
+                  .attr("x1", 0)
+                  .attr("y1", 0)
+                  .attr("x2", 0)
+                  .attr("y2", -140) 
+                  .attr("stroke", "red") 
+                  .attr("stroke-width", 3);
+
+    var slider = document.getElementById("angleSlider");
+    slider.addEventListener("input", function() {
+        updateNeedle(this.value);
     });
 
-    document.getElementById('saveHistoryBtn').addEventListener('click', function() {
-        const sessionLabel = document.getElementById('sessionLabelInput').value.trim();
-        if (sessionLabel === '') {
-          alert('Please enter a session label.');
-          return;
-        }
-        
-        const instrumentCards = document.querySelectorAll('.instrument-card .card');
-        const instruments = Array.from(instrumentCards).map(card => {
-            const detailsDiv = card.querySelector('.instrument-details');
-            const transcriptionOfNotes = detailsDiv.textContent.replace('Transcription of Notes: ', '').split(', ');
-            return {
-                id: card.querySelector('.view-details-btn').getAttribute('data-id'),
-                name: card.querySelector('.card-title').textContent,
-                section: card.querySelector('.card-text').textContent.match(/Section: (\w+)/)[1],
-                row: card.querySelector('.card-text').textContent.match(/Row: (\d+)/)[1],
-                position: card.querySelector('.card-text').textContent.match(/Position: (\d+)/)[1],
-                transcriptionOfNotes: transcriptionOfNotes
-            };
-        });
+    function updateNeedle(angle) {
+        var rad = (angle - 90) * (Math.PI / 180);
+        needle.attr("transform", `rotate(${angle - 90})`);
+        updateInstrumentDetails(angle);
+    }
 
-        console.log("Instruments to send:", instruments);
-
-        fetch('/api/history', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include', // Include credentials for session cookie
-          body: JSON.stringify({sessionLabel: sessionLabel, instruments: instruments}),
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to save history');
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Session saved successfully:', data);
-          alert('Session saved successfully.');
-          window.location.href = '/history';
-        })
-        .catch(error => {
-          console.error('Error saving session history:', error.message, error.stack);
-          alert('An error occurred while saving your session. Please try again.');
-        });
+    function updateInstrumentDetails(angle) {
+    const closestInstrument = instrumentsData.reduce((prev, curr) => {
+        return (Math.abs(curr.angleOfArrival - angle) < Math.abs(prev.angleOfArrival - angle) ? curr : prev);
     });
-});
 
-function attachClickEventToCards() {
-    document.querySelectorAll('.view-details-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const card = this.closest('.instrument-card').querySelector('.card');
-            const allCards = document.querySelectorAll('.instrument-card .card');
-
-            let isExpanded = card.classList.contains('expanded');
-            allCards.forEach(otherCard => {
-                if (otherCard !== card) {
-                    if (!isExpanded) {
-                        otherCard.classList.add('blur');
-                    } else {
-                        otherCard.classList.remove('blur');
-                    }
-                }
-            });
-
-            card.classList.toggle('expanded');
-
-            const detailsDiv = card.querySelector('.instrument-details');
-            const instrumentId = button.getAttribute('data-id');
-            
-            if (detailsDiv.classList.contains('d-none')) {
-                fetch(`/api/instruments/${instrumentId}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch instrument details');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    detailsDiv.innerHTML = `<p><strong>Transcription of Notes:</strong> ${data.transcriptionOfNotes.join(', ')}</p>`;
-                    detailsDiv.classList.remove('d-none');
-                    button.textContent = 'Hide Details';
-                })
-                .catch(error => {
-                    console.error('Error fetching instrument details:', error.message, error.stack);
-                    alert('Failed to load instrument details. Please try again later.');
-                });
-            } else {
-                detailsDiv.classList.add('d-none');
-                button.textContent = 'View Details';
-                allCards.forEach(otherCard => {
-                    otherCard.classList.remove('blur');
-                });
-                if (!isExpanded) {
-                    card.classList.remove('expanded');
-                }
-            }
-        });
-    });
+    document.getElementById('instrumentName').innerText = closestInstrument ? closestInstrument.name : 'Instrument not found';
+    document.getElementById('instrumentDistance').innerText = closestInstrument ? `Distance: ${closestInstrument.distance} m` : '';
+    document.getElementById('instrumentAngle').innerText = `Angle: ${angle}°`;
 }
+
+    function fetchInstrumentsData() {
+        fetch('/api/instruments')
+            .then(response => response.json())
+            .then(data => {
+                instrumentsData = data;
+            })
+            .catch(error => console.error("Error fetching instrument data: ", error));
+    }
+});

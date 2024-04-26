@@ -19,8 +19,8 @@ router.get('/api/history', isAuthenticated, async (req, res) => {
 router.post('/api/history', isAuthenticated, async (req, res) => {
   try {
     const { sessionLabel, instruments } = req.body;
-    console.log('Received session label:', sessionLabel); // Re-added logging
-    console.log('Received instruments:', instruments); // Re-added logging
+    console.log('Received session label:', sessionLabel); 
+    console.log('Received instruments:', instruments); 
     if (!sessionLabel) {
       console.log('Session label is required but not provided');
       return res.status(400).send('Session label is required');

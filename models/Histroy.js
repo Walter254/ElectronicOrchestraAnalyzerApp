@@ -8,7 +8,7 @@ const historySchema = new mongoose.Schema({
   position: String,
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', // Assuming you have a User model
+    ref: 'User', 
   },
 });
 

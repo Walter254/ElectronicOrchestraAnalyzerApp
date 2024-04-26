@@ -7,9 +7,9 @@ const historySchema = new mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     name: { type: String, required: true },
     section: { type: String, required: true },
-    row: { type: Number, required: true }, // Changed type to Number
-    position: { type: Number, required: true }, // Changed type to Number
-    transcriptionOfNotes: [{ type: String, required: true }], // Ensure this is an array of strings
+    row: { type: Number, required: true }, 
+    position: { type: Number, required: true }, 
+    transcriptionOfNotes: [{ type: String, required: true }], 
   }],
   userId: {
     type: mongoose.Schema.Types.ObjectId,

@@ -1,4 +1,3 @@
-// This file is intended to manage client-side functionality for the History page.
 
 document.addEventListener('DOMContentLoaded', function() {
     // Fetch history data when the page loads

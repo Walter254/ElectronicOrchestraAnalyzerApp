@@ -173,3 +173,49 @@ body, html {
   font-size: 1.25rem; /* This increases the font size slightly */
   color: #333333; /* Adjusted for better contrast against card background. Change the color as needed to fit the theme */
 }
+
+
+#gauge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#details {
+  border: 3px solid rgb(33, 31, 81);
+  padding: 20px;
+  margin-left: 60px; 
+  margin-right: 60px;
+  margin-top: 40px; 
+  font-weight: bold;
+  color: rgb(8, 9, 9);
+  background: #f4f4f4;
+}
+
+.slider {
+    width: 330px; 
+    appearance: none;
+    height: 15px;
+    border-radius: 10px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+.slider:hover {
+    opacity: 1;
+}
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgb(16, 188, 122);
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgb(151, 144, 128);
+    cursor: pointer;
+}
