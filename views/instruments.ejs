@@ -4,15 +4,34 @@
 <body>
     <%- include('partials/_header.ejs') %>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <div id="gauge-container">
-        <div id="gauge" style="width: 350px; height: 200px;"></div>
-        <input type="range" min="0" max="180" value="90" class="slider" id="angleSlider">
+    
+    <!-- Main container with reduced gap -->
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 5px; gap: 1px;">
+        <!-- Gauge display container -->
+        <div id="gauge-container" style="width: 350px; height: 200px;">
+            <div id="gauge"></div>
+        </div>
+
+        <!-- Control buttons and slider -->
+        <div style="display: flex; flex-direction: column; align-items: center; margin-top: 1px;">
+            <button id="playPauseButton" onclick="togglePlay()" style="margin-bottom: 20px; margin-top: 1px">Play</button>
+            <input type="range" min="0" max="180" value="90" class="slider" id="angleSlider" style="width: 300px; margin-bottom: 5px">
+        </div>
+
+        <!-- Session save controls with reduced margin -->
+        <div style="display: flex; align-items: center; margin-top: 5px;">
+            <input type="text" id="sessionName" placeholder="Enter session name" style="margin-right: 10px; padding: 8px; border-radius: 4px; border: 2px solid #ccc;">
+            <button onclick="saveSession()" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Save Session</button>
+        </div>
     </div>
-    <div id="details" class="details">
+    
+    <!-- Instrument details display -->
+    <div id="details" style="border: 3px solid rgb(33, 31, 81); padding: 20px; margin: 40px auto; font-weight: bold; color: rgb(8, 9, 9); background: #f4f4f4; width: 80%; max-width: 600px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
         <h2 id="instrumentName"></h2>
         <p id="instrumentDistance"></p>
         <p id="instrumentAngle"></p>
     </div>
-    <script src="/js/instruments.js"></script> 
+    
+    <script src="/js/instruments.js"></script>
 </body>
 </html>

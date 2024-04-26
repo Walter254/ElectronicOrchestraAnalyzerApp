@@ -34,10 +34,9 @@ router.post('/api/history', isAuthenticated, async (req, res) => {
       return {
         id: instrument.id,
         name: instrument.name,
-        section: instrument.section,
-        row: parseInt(instrument.row, 10),
-        position: parseInt(instrument.position, 10),
-        transcriptionOfNotes: instrument.transcriptionOfNotes
+        angleOfArrival: instrument.angleOfArrival,
+        distance: instrument.distance,
+        photoUrl: instrument.photoUrl
       };
     });
     

@@ -36,10 +36,9 @@ function displayHistoryData(historyData) {
             <td>${new Date(entry.timestamp).toLocaleString()}</td>
             <td>${entry.sessionLabel || 'N/A'}</td>
             <td>${entry.instruments.map(instrument => instrument.name).join(', ')}</td>
-            <td>${entry.instruments.map(instrument => instrument.section).join(', ')}</td>
-            <td>${entry.instruments.map(instrument => instrument.row).join(', ')}</td>
-            <td>${entry.instruments.map(instrument => instrument.position).join(', ')}</td>
-            <td>${entry.instruments.map(instrument => instrument.transcriptionOfNotes.join(", ")).join('; ')}</td>
+            <td>${entry.instruments.map(instrument => instrument.angleOfArrival).join(', ')}</td>
+            <td>${entry.instruments.map(instrument => instrument.distance).join(', ')}</td>
+            <td>${entry.instruments.map(instrument => instrument.photoUrl).join(', ')}</td>
         `;
         tableBody.appendChild(row);
     });

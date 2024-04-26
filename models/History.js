@@ -6,10 +6,9 @@ const historySchema = new mongoose.Schema({
   instruments: [{
     id: mongoose.Schema.Types.ObjectId,
     name: { type: String, required: true },
-    section: { type: String, required: true },
-    row: { type: Number, required: true }, 
-    position: { type: Number, required: true }, 
-    transcriptionOfNotes: [{ type: String, required: true }], 
+    angleOfArrival: { type: Number, required: true },
+    distance: { type: Number, required: true }, 
+    photoUrl: { type: String, required: false }, 
   }],
   userId: {
     type: mongoose.Schema.Types.ObjectId,

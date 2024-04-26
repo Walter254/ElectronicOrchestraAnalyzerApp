@@ -178,44 +178,114 @@ body, html {
 #gauge-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    margin-top: 100px;
     align-items: center;
 }
 #details {
-  border: 3px solid rgb(33, 31, 81);
+  border: 3px solid #211F55; /* Dark blue border */
   padding: 20px;
-  margin-left: 60px; 
+  margin-left: 60px;
   margin-right: 60px;
-  margin-top: 40px; 
+  margin-top: 40px;
   font-weight: bold;
-  color: rgb(8, 9, 9);
-  background: #f4f4f4;
+  color: #211F55; /* Dark blue text, enhancing the orchestral theme */
+  background: linear-gradient(to bottom, #f4f4f4 0%, #e6e6e6 100%); /* Subtle gradient for sophistication */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), /* Outer shadow for depth */
+              inset 0 1px 3px rgba(255, 255, 255, 0.5); /* Inner light for a soft lift */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for a 3D effect */
+  border-radius: 10px; /* Rounded corners for a modern, softer look */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
 
+#details:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover for interactive feel */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+
 .slider {
-    width: 330px; 
-    appearance: none;
-    height: 15px;
-    border-radius: 10px;
-    background: #ddd;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity .2s;
+  width: 350px;             /* Control the width to fit your layout */
+  margin-top: -10px;
+  appearance: none;         /* Remove default styles */
+  height: 10px;             /* Set the height of the slider */
+  border-radius: 10px;      /* Rounded corners for a smoother look */
+  background: linear-gradient(to right, #000, #ffd700, #000); /* Gradient from black to gold to black */
+  outline: none;            /* No outline on focus */
+  opacity: 0.7;             /* Start with a lower opacity for an elegant look */
+  transition: opacity 0.2s; /* Smooth transition for opacity changes */
 }
+
 .slider:hover {
-    opacity: 1;
+  opacity: 1; /* Full opacity on hover for better interaction visibility */
 }
+
 .slider::-webkit-slider-thumb {
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: rgb(16, 188, 122);
-    cursor: pointer;
+  appearance: none;
+  width: 25px;                   /* Width of the thumb */
+  height: 25px;                  /* Height of the thumb */
+  border-radius: 50%;            /* Circular shape */
+  background: #ffd700;           /* Gold color to match the orchestra theme */
+  cursor: pointer;               /* Cursor indicates the element is interactive */
+  box-shadow: 0 0 4px #555;      /* Subtle shadow for a 3D effect */
+  transition: background 0.3s;   /* Smooth background transition on hover */
 }
+
+.slider::-webkit-slider-thumb:hover {
+  background: #ffcc00; /* A lighter gold when hovered */
+}
+
 .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: rgb(151, 144, 128);
-    cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #ffd700;   /* Ensuring consistent appearance across browsers */
+  cursor: pointer;
+  box-shadow: 0 0 4px #555;
 }
+
+.slider::-moz-range-thumb:hover {
+  background: #ffcc00;
+}
+
+.slider::-ms-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #ffd700;
+  cursor: pointer;
+  box-shadow: 0 0 4px #555;
+}
+
+.slider::-ms-thumb:hover {
+  background: #ffcc00;
+}
+
+.slider:focus::-webkit-slider-thumb, .slider:focus::-moz-range-thumb, .slider:focus::-ms-thumb {
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.5); /* Adds a glow effect around the thumb on focus */
+}
+
+#playPauseButton {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  background-color: #4A235A; /* Dark purple for a rich, deep look */
+  color: #E8DAEF; /* Light lavender for contrast */
+  border: none;
+  border-radius: 10px; /* Rounded edges */
+  padding: 10px 20px; /* Padding for better touch area and aesthetics */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+  font-size: 16px; /* Readable font size */
+  text-shadow: 1px 1px 2px black; /* Text shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle box shadow for 3D effect */
+  cursor: pointer; /* Cursor pointer to indicate it's clickable */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+#playPauseButton:hover, #playPauseButton:focus {
+  background-color: #5D3FD3; /* Lighter purple on hover for visual feedback */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Larger shadow on hover for more depth */
+  outline: none; /* Remove outline on focus for cleaner look */
+}
+
