@@ -34,7 +34,7 @@
             <td><%= new Date(entry.timestamp).toLocaleString() %></td>
             <td>
               <% entry.instruments.forEach(function(instrument, index) { %>
-                <strong>Instrument <%= index + 1 %>:</strong> Name: <%= instrument.name %>, Section: <%= instrument.section %>, Row: <%= instrument.row %>, Position: <%= instrument.position %>, Transcription of Notes: <%= instrument.transcriptionOfNotes.join(", ") %><br>
+                <strong>Instrument <%= index + 1 %>:</strong> Name: <%= instrument.name %>, Angle of Arrival: <%= instrument.angleOfArrival %>, Distance: <%= instrument.distance %> cm<% if (instrument.photoUrl) { %>, Photo URL: <%= instrument.photoUrl %><% } %><br>
               <% }); %>
             </td>
           </tr>

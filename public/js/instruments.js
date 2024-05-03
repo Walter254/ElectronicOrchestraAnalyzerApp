@@ -68,47 +68,47 @@ document.addEventListener('DOMContentLoaded', function() {
     feMerge.append("feMergeNode")
            .attr("in", "SourceGraphic");
     
-           var saveButton = document.getElementById('saveSessionButton');
-           if (saveButton) {
-               saveButton.addEventListener('click', saveSession);
-           }
-       
-           function saveSession() {
-               var sessionName = document.getElementById('sessionName').value;
-               if (!sessionName) {
-                   alert('Please enter a session name');
-                   return;
-               }
-       
-               var currentInstrumentData = getCurrentInstrumentData();
-               fetch('/api/history', {
-                   method: 'POST',
-                   headers: {'Content-Type': 'application/json'},
-                   body: JSON.stringify({
-                       sessionLabel: sessionName,
-                       instruments: currentInstrumentData
-                   })
-               })
-               .then(response => response.json())
-               .then(data => {
-                   console.log('Session saved:', data);
-                   alert('Session saved successfully!');
-               })
-               .catch(error => {
-                   console.error('Failed to save session:', error);
-                   alert('Failed to save session');
-               });
-           }
-       
-           function getCurrentInstrumentData() {
-               return instrumentsData.map(instrument => ({
-                   id: instrument.id,
-                   name: instrument.name,
-                   angleOfArrival: instrument.angleOfArrival,
-                   distance: instrument.distance,
-                   photoUrl: instrument.photoUrl
-               }));
-           }
+    var saveButton = document.getElementById('saveSessionButton');
+    if (saveButton) {
+        saveButton.addEventListener('click', saveSession);
+    }
+
+    function saveSession() {
+        var sessionName = document.getElementById('sessionName').value;
+        if (!sessionName) {
+            alert('Please enter a session name');
+            return;
+        }
+
+        var currentInstrumentData = getCurrentInstrumentData();
+        fetch('/api/history', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                sessionLabel: sessionName,
+                instruments: currentInstrumentData
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Session saved:', data);
+            alert('Session saved successfully!');
+        })
+        .catch(error => {
+            console.error('Failed to save session:', error);
+            alert('Failed to save session');
+        });
+    }
+
+    function getCurrentInstrumentData() {
+        return instrumentsData.map(instrument => ({
+            id: instrument.id,
+            name: instrument.name,
+            angleOfArrival: instrument.angleOfArrival,
+            distance: instrument.distance,
+            photoUrl: instrument.photoUrl
+        }));
+    }
        
 
     // Define a radial gradient for the needle tip shine
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         document.getElementById('instrumentName').innerText = closestInstrument ? closestInstrument.name : 'Instrument not found';
-        document.getElementById('instrumentDistance').innerText = closestInstrument ? `Distance: ${closestInstrument.distance} m` : '';
+        document.getElementById('instrumentDistance').innerText = closestInstrument ? `Distance: ${closestInstrument.distance} cm` : '';
         document.getElementById('instrumentAngle').innerText = `Angle: ${angle}°`;
     }
 
