@@ -2,6 +2,10 @@
 
 WisteriaApp is an innovative web application dedicated to presenting pre-analyzed data about musical instruments in an interactive and engaging manner. It interfaces seamlessly with the Electronic Orchestra Analyzer project, displaying information such as identification, photos, names, spatial localization, and transcriptions of notes through a dynamic user interface themed around a modern, colorful orchestra setting.
 
+![EOA-Poster](https://github.com/user-attachments/assets/b705207d-4ea5-4fa4-afe4-2754fa9caf8c)
+
+
+
 ## Overview
 
 WisteriaApp is built on a robust technology stack comprising Node.js and Express for backend operations, MongoDB with Mongoose ORM for database management, and Vanilla JavaScript with Bootstrap for frontend development. The application leverages EJS for templating, ensuring a seamless and responsive user experience across different devices.
