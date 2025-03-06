@@ -1,9 +1,15 @@
 # WisteriaApp
 
-WisteriaApp is an innovative web application dedicated to presenting pre-analyzed data about musical instruments in an interactive and engaging manner. It interfaces seamlessly with the Electronic Orchestra Analyzer project, displaying information such as identification, photos, names, spatial localization, and transcriptions of notes through a dynamic user interface themed around a modern, colorful orchestra setting.
+WisteriaApp is an innovative web application dedicated to presenting pre-analyzed data about musical instruments in an interactive and engaging manner. It interfaces seamlessly with the Electronic Orchestra Analyzer project, displaying information such as names and spatial localization of notes through a dynamic user interface themed around a modern, colorful orchestra setting.
 
 ![EOA-Poster](https://github.com/user-attachments/assets/b705207d-4ea5-4fa4-afe4-2754fa9caf8c)
 
+
+## Video Demo
+
+Check out our video demo to see WisteriaApp in action:
+
+[![Watch the video](/public/images/instrumentimg.jpeg)](https://www.loom.com/share/10867652fb454b52ad407bb06413d982?sid=02ade05a-53a1-453b-b59e-4d7963894d42)
 
 
 ## Overview
