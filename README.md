@@ -7,7 +7,7 @@ WisteriaApp is an innovative web application dedicated to presenting pre-analyze
 
 ## Video Demo
 
-Check out our video demo to see WisteriaApp in action:
+Check out the video demo to see WisteriaApp in action:
 
 [![Watch the video](/public/images/instrumentimg.jpeg)](https://www.loom.com/share/10867652fb454b52ad407bb06413d982?sid=02ade05a-53a1-453b-b59e-4d7963894d42)
 
